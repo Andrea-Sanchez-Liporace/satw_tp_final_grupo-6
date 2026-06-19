@@ -1,0 +1,1 @@
+web: gunicorn tp_web.wsgi
