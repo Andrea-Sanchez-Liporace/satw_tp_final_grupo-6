@@ -1,0 +1,19 @@
+/* En este archivo definimos los stilos del apartado Login */
+h2 {
+    text-align: center;
+    text-decoration: underline;
+    margin-bottom: 40px;
+}
+
+form{
+    padding: 60px 25px;
+    border-radius: 20px;
+    border-color: var(--color-secundario);
+    border-width: thin;
+    border-style: solid;
+    background-color: var(--color-fondo-secundario);
+}
+
+form button {
+    margin-top: 20px
+}

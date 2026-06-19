@@ -1,0 +1,39 @@
+<!-- Esta es la pagina de login de nuestro sitio: donde un usuario ya registrado, ingresa a su perfil y accede a la vista del catalogo con posibilidad de hacer consultas-->
+<!-- La ve cualquier visitante que no este logueado. -->
+<!-- Usa index.html para cargar la parte del código que es común a todas las páginas del sitio -->
+{% extends 'index.html' %}
+<!-- Cargamos el modulo static para poder referenciar archivos estaticos como CSS e imagenes -->
+{% load static %}
+<!-- Cargamos el CSS especifico de esta pagina, que se suma al styles.css del index -->
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/style_login.css' %}">
+{% endblock %}
+<!-- Definimos el titulo que queremos cargar para esta página -->
+{% block titulo %}Ingresar{% endblock %}
+<!-- Dentro de este otro bloque vamos a codear el contenido que queremos mostrar en esta vista -->
+{% block contenido %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-5">
+            <h2 class="mb-4 text-center">Ingresar</h2>
+            {% if error %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endif %}
+            <form method="POST" action="{% url 'login' %}">
+                {% csrf_token %}
+                <div class="mb-4">
+                    <label for="username" class="form-label">Usuario</label>
+                    <input type="text" class="form-control" id="username" name="username" required>
+                </div>
+                <div class="mb-4">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-dark w-100">Ingresar</button>
+            </form>
+            <p class="text-center mt-3">¿Todavía no te creaste una cuenta? </p>
+            <p class="text-center"><a href="{% url 'registro' %}">Registrate acá</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

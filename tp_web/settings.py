@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Agregamos nuestra app al proyecto para que Django la reconozca y cargue sus modelos, vistas y templates
     'app',
 ]
 
@@ -121,3 +122,9 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Le indicamos a Django donde buscar los archivos estaticos del proyecto.
+# Sin esta configuracion Django no encuentra el CSS, las imagenes ni el JS que creamos en app/static/
+STATICFILES_DIRS = [
+    BASE_DIR / 'app' / 'static',
+]

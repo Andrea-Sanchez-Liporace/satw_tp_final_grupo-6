@@ -1,0 +1,91 @@
+<!-- Esta es la segunda pagina de nuestro sitio: donde contamos quienes somos. -->
+<!-- La ve cualquier visitante, este o no logueado. -->
+<!-- Usa index.html para cargar la parte del código que es común a todas las páginas del sitio -->
+{% extends 'index.html' %}
+<!-- Cargamos el modulo static para poder referenciar archivos estaticos como CSS e imagenes -->
+{% load static %}
+<!-- Cargamos el CSS especifico de esta pagina, que se suma al styles.css del index -->
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/style_nosotros.css' %}">
+{% endblock %}
+<!-- Definimos el titulo que queremos cargar para esta página -->
+{% block titulo %}Nosotros{% endblock %}
+<!-- Dentro de este otro bloque vamos a codear el contenido que queremos mostrar en esta vista -->
+{% block contenido %}
+<div class="container py-5">
+    <!-- Introduccion del equipo -->
+    <div class="row mb-5">
+        <div class="col-12 text-center">
+            <h2 class="mb-4">Nosotras</h2>
+            <p class="lead">Somos cuatro chicas que decidimos que la tecnología también es nuestra.  </p>
+            <p class="lead">En distintos momentos de nuestras vidas elegimos formarnos en análisis de sistemas, combinando experiencia laboral, intuición de diseño y ganas de construir algo propio. </p>
+            <p class="lead">Este sitio es el resultado de ese trabajo en equipo: código, criterio, creatividad y ¡moda!</p>
+        </div>
+    </div>
+
+    <!-- Cards del equipo -->
+    <div class="row g-4 mb-5">
+        <div class="col-12 col-md-6">
+            <div class="card bg-dark text-white">
+                <div class="row g-0">
+                    <div class="col-4">
+                        <img src="{% static 'images/andrea.png' %}" class="img-fluid rounded-start h-100" style="object-fit: cover;" alt="Andrea">
+                    </div>
+                    <div class="col-8">
+                        <div class="card-body m-4">
+                            <h5 class="card-title">Andrea Sanchez Liporace</h5>
+                            <p class="card-text">Fullstack & Diseño</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="card bg-dark text-white">
+                <div class="row g-0">
+                    <div class="col-4">
+                        <img src="https://placehold.co/150x150" class="img-fluid rounded-start h-100" style="object-fit: cover;" alt="Natalia">
+                    </div>
+                    <div class="col-8">
+                        <div class="card-body">
+                            <h5 class="card-title m-4">Natalia Sanchez Liporace</h5>
+                            <p class="card-text">Frontend & Diseño</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="card bg-dark text-white">
+                <div class="row g-0">
+                    <div class="col-4">
+                        <img src="{% static 'images/Sofia.avif' %}" class="img-fluid rounded-start h-100" style="object-fit: cover;" alt="Sofia">
+                    </div>
+                    <div class="col-8">
+                        <div class="card-body m-4">
+                            <h5 class="card-title">Sofía Soledad Paez</h5>
+                            <p class="card-text">UX/UI & Diseño</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="card bg-dark text-white">
+                <div class="row g-0">
+                    <div class="col-4">
+                        <img src="https://placehold.co/150x150" class="img-fluid rounded-start h-100" style="object-fit: cover;" alt="Yhosselin">
+                    </div>
+                    <div class="col-8">
+                        <div class="card-body m-4">
+                            <h5 class="card-title">Yhosselin Vargas</h5>
+                            <p class="card-text">Frontend & Diseño</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

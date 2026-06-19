@@ -1,0 +1,16 @@
+<!-- Esta es la pagina de consultas a la que solo puede acceder el usuario logueado, como no tenemos carrito de compras lo reemplazamos con la funcion de consultas-->
+<!-- Usa index.html para cargar la parte del código que es común a todas las páginas del sitio -->
+{% extends 'index.html' %}
+<!-- Cargamos el modulo static para poder referenciar archivos estaticos como CSS e imagenes -->
+{% load static %}
+<!-- Cargamos el CSS especifico de esta pagina, que se suma al styles.css del index -->
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/style_consultas.css' %}">
+{% endblock %}
+<!-- Definimos el titulo que queremos cargar para esta página -->
+{% block titulo %}Consultas{% endblock %}
+<!-- Dentro de este otro bloque vamos a codear el contenido que queremos mostrar en esta vista -->
+{% block contenido %}
+    <h2>Mis consultas</h2>
+    <p>Formulario y listado de consultas</p>
+{% endblock %}

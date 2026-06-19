@@ -1,0 +1,137 @@
+/* En este archivo definimos los stilos basicos de la web
+la paleta de colores
+la fuente
+y los estilos de los bloques estaticos como el header y el footer
+*/
+
+:root {
+    --color-primario: #000000;
+    --color-secundario: #333333;
+    --color-terciario: #a7a6a6;
+    --color-fondo: #ffffff;
+    --color-fondo-secundario: #f5f5f5;
+    --color-borde: #dddddd;
+    --color-texto: #222222;
+    --color-texto-claro: #ffffff;
+    --fuente-marca: 'Trebuchet MS', sans-serif;
+    --fuente-principal: sans-serif;
+    --fuente-tamanio-base: 16px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--fuente-principal);
+    font-size: var(--fuente-tamanio-base);
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+}
+
+main {
+    min-height: 70vh;
+}
+
+/* Header */
+header {
+    background-color: var(--color-primario);
+    padding: 25px 50px;
+}
+
+/* Marca - H1 */
+header h1 a {
+    color: var(--color-texto-claro) !important;
+    text-decoration: none;
+    font-family: var(--fuente-marca) !important;
+    font-size: 2rem !important;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+/* Menú de navegación */
+header .navbar {
+    padding: 0;
+    background-color: var(--color-primario);
+}
+
+.navbar-toggler {
+    border-color: var(--color-texto-claro);
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255,255,255,1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+header .nav-item {
+    text-align: center;
+    margin: 0px 15px
+} 
+
+header .nav-link {
+    color: var(--color-texto-claro);
+}
+
+header .nav-link:hover {
+    color: var(--color-terciario);
+    text-decoration: underline;
+}
+
+/* Boton ingresar */
+.navbar .btn-ingresar {
+    background-color: var(--color-terciario);
+    color: var(--color-primario);
+    border: none;
+    padding: 6px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.navbar .btn-ingresar:hover {
+    background-color: var(--color-secundario);
+    color: var(--color-texto-claro);
+}
+/* Menú de navegación */
+/* Header */
+
+
+/* Footer */
+footer {
+    background-color: var(--color-primario);
+    color: var(--color-texto-claro);
+    padding: 30px 20px;
+    margin-top: 40px;
+    font-size: 0.85rem;
+}
+
+footer a {
+    color: var(--color-texto-claro);
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: var(--color-terciario);
+}
+
+footer p {
+    margin-bottom: 5px;
+}
+
+footer ul {
+    list-style: none;
+    padding: 0;
+}
+
+footer li {
+    margin-bottom: 3px;
+}
+
+footer img {
+    filter: invert(1);
+}
+/* Footer */
