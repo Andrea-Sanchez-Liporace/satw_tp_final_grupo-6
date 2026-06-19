@@ -11,6 +11,51 @@
 {% block titulo %}Consultas{% endblock %}
 <!-- Dentro de este otro bloque vamos a codear el contenido que queremos mostrar en esta vista -->
 {% block contenido %}
-    <h2>Mis consultas</h2>
-    <p>Formulario y listado de consultas</p>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8">
+
+            <h2>Nueva consulta</h2>
+            <form method="POST" class="mb-5">
+                {% csrf_token %}
+                <div class="row g-3">
+                    <div class="col-12 col-md-6">
+                        <label class="form-label">Asunto</label>
+                        <input type="text" name="asunto" class="form-control" required>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label class="form-label">Producto (opcional)</label>
+                        <input type="text" name="producto" class="form-control" value="{{ producto_seleccionado }}">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Mensaje</label>
+                        <textarea name="mensaje" class="form-control" rows="4" required></textarea>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <button type="submit" class="btn btn-dark">Enviar consulta</button>
+                </div>
+            </form>
+
+            <h2>Consultas enviadas</h2>
+            {% if consultas %}
+                {% for consulta in consultas %}
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title"><b>Asunto:</b> {{ consulta.asunto }}</h5>
+                        {% if consulta.producto %}
+                            <p class="card-subtitle text-muted mb-2">Producto: {{ consulta.producto }}</p>
+                        {% endif %}
+                        <p class="card-text"><b>Tu mensaje:</b> {{ consulta.mensaje }}</p>
+                        <small class="text-muted">Consulta enviada el dia {{ consulta.fecha|date:"d/m/Y" }} a las {{ consulta.fecha|date:"H:i" }}</small>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p class="text-muted">Todavía no hiciste ninguna consulta.</p>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
 {% endblock %}

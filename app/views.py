@@ -15,9 +15,10 @@ from django.db import IntegrityError
 import requests
 # Importamos nuestro modelo Consulta para guardar y mostrar consultas.
 from .models import Consulta
+# Importamos nuestro modelo Perfil para guardar cambios y mostrar los datos del usuario.
+from .models import Perfil
 
 # --- PAGINAS PUBLICAS ---
-
 def nosotros(request):
     # Renderiza la pagina de informacion de la empresa.
     return render(request, 'nosotros.html')
@@ -43,7 +44,8 @@ def registro(request):
                 # Creamos el usuario con los datos del formulario.
                 user = User.objects.create_user(
                     username=request.POST['username'],
-                    password=request.POST['password1']
+                    password=request.POST['password1'],
+                    email=request.POST['email']
                 )
                 user.save()
                 # Iniciamos sesion automaticamente despues del registro.
@@ -64,11 +66,11 @@ def login_view(request):
         return render(request, 'login.html')
     else:
         # authenticate verifica si el usuario y contraseña son correctos.
-        user = authenticate(
-            request,
-            username=request.POST['username'],
-            password=request.POST['password']
-        )
+        try:
+            user_obj = User.objects.get(email=request.POST['email'])
+            user = authenticate(request, username=user_obj.username, password=request.POST['password'])
+        except User.DoesNotExist:
+            user = None
         if user is None:
             # Si las credenciales son incorrectas mostramos error.
             return render(request, 'login.html', {
@@ -86,8 +88,33 @@ def logout_view(request):
 
 # --- PAGINAS PRIVADAS ---
 def perfil(request):
+    # Verifica que el usuario este logueado sino lo lleva a la pagina de login
+    if not request.user.is_authenticated:
+        return redirect('login')
+    # get_or_create crea el perfil si el usuario todavia no tiene uno
+    perfil, _ = Perfil.objects.get_or_create(usuario=request.user)
+    if request.method == 'POST':
+        if 'eliminar' in request.POST:
+            request.user.delete()
+            return redirect('home')
+        perfil.nombre = request.POST.get('nombre', '')
+        perfil.apellido = request.POST.get('apellido', '')
+        perfil.calle = request.POST.get('calle', '')
+        perfil.altura = request.POST.get('altura') or None
+        perfil.entreCalles = request.POST.get('entreCalles', '')
+        perfil.localidad = request.POST.get('localidad', '')
+        perfil.codigoPostal = request.POST.get('codigoPostal') or None
+        perfil.provincia = request.POST.get('provincia', '')
+        perfil.pais = request.POST.get('pais', '')
+        perfil.save()
+        nuevo_username = request.POST.get('username', '').strip()
+        if nuevo_username:
+            request.user.username = nuevo_username
+        request.user.email = request.POST.get('email', '')
+        request.user.save()
+        return redirect('perfil')
     # Muestra el perfil del usuario logueado.
-    return render(request, 'perfil.html')
+    return render(request, 'perfil.html', {'perfil': perfil})
 
 def consultas(request):
     # Muestra y gestiona las consultas del usuario logueado.
@@ -96,12 +123,14 @@ def consultas(request):
     if request.method == 'GET':
         # Obtenemos solo las consultas del usuario logueado.
         consultas = Consulta.objects.filter(usuario=request.user)
-        return render(request, 'consultas.html', {'consultas': consultas})
+        producto_seleccionado = request.GET.get('producto', '')
+        return render(request, 'consultas.html', {'consultas': consultas, 'producto_seleccionado': producto_seleccionado})
     else:
         # Guardamos la nueva consulta en la base de datos.
         Consulta.objects.create(
             usuario=request.user,
             asunto=request.POST['asunto'],
+            producto=request.POST.get('producto', ''),
             mensaje=request.POST['mensaje']
         )
         return redirect('consultas')

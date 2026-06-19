@@ -1,0 +1,35 @@
+/* En este archivo definimos los stilos del apartado Consultas */
+h2 {
+    text-align: center;
+    text-decoration: underline;
+    margin-bottom: 40px;
+}
+
+form{
+    padding: 60px 25px;
+    border-radius: 20px;
+    border-color: var(--color-secundario);
+    border-width: thin;
+    border-style: solid;
+    background-color: var(--color-fondo-secundario);
+}
+
+/* Listado de consultas enviadas */
+.card {
+
+}
+
+.card-title b, p b{
+    text-decoration: underline;
+}
+
+.card-text {
+    font-style: italic;
+}
+
+small {
+    text-align: right;
+    display: block;
+    font-size: .70em;
+    font-style: italic;
+}

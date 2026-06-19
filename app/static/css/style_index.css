@@ -86,9 +86,9 @@ header .nav-link:hover {
     padding: 6px 16px;
     border-radius: 4px;
     text-decoration: none;
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    text-decoration: none;
+    justify-content: center;
     font-weight: bold;
 }
 

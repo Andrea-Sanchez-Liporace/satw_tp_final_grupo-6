@@ -66,9 +66,11 @@
                     <p class="card-text">$ {{ producto.price }}</p>
                 </div>
                 <div class="card-footer">
-                    <!-- Si el usuario esta logueado puede hacer una consulta sobre el producto -->
+                    <!-- Si el usuario esta logueado puede hacer una consulta sobre el producto 
+                    Si va al form de consulta desde el link consultar de abajo, enviamos el nombre del producto por url para mostrarlo en el form
+                    -->
                     {% if user.is_authenticated %}
-                        <a href="{% url 'consultas' %}" class="btn btn-dark w-100">Consultar</a>
+                        <a href="{% url 'consultas' %}?producto={{ producto.title }}" class="btn btn-dark w-100">Consultar</a>
                     {% else %}
                         <a href="{% url 'login' %}" class="btn btn-outline-dark w-100">Ingresá para consultar</a>
                     {% endif %}
