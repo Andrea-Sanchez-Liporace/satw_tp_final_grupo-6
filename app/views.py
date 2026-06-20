@@ -26,9 +26,12 @@ def nosotros(request):
 def catalogo(request):
     # Consume la API externa de FakeStoreAPI para obtener productos de ropa de mujer.
     # requests.get() hace una solicitud HTTP GET a la URL de la API.
-    respuesta = requests.get("https://fakestoreapi.com/products/category/women's clothing")
-    # Convertimos la respuesta a formato JSON para poder recorrerla en el template.
-    productos = respuesta.json()
+    try:
+        respuesta = requests.get("https://fakestoreapi.com/products/category/women's clothing", timeout=10)
+        # Convertimos la respuesta a formato JSON para poder recorrerla en el template.
+        productos = respuesta.json()
+    except Exception:
+        productos = []
     return render(request, 'catalogo.html', {'productos': productos})
 
 # --- AUTENTICACION ---
